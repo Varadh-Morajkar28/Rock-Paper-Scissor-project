@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Rock Paper Scissors Mobile
+    </title>
+    <style>
+        @media (max-width: 600px) {
+            * {
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+
+            .choice {
+                height: 120px;
+                width: 120px;
+            }
+
+            .choices {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .score-board {
+                display: flex;
+                flex-direction: grid;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            #user-score,
+            #comp-score {
+                font-size: 2.5rem;
+
+            }
+
+            #msg {
+                font-size: 1.5rem;
+                padding: 0.5rem;
+
+            }
+
+            #dark {
+                width: 100px;
+                height: 100px;
+            }
+
+            .dark {
+                background-color: black;
+                color: white;
+            }
+
+            .white {
+                background-color: white;
+                color: black;
+            }
+        }
+
+
+        #dark {
+            width: 150px;
+            height: 50px;
+            border-radius: 5%;
+            margin-top: 5px;
+        }
+
+        .dark {
+            background-color: black;
+            color: white;
+        }
+
+        .white {
+            background-color: white;
+            color: black;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: blue;
+            color: #fff;
+            height: 5rem;
+            text-align: center;
+            line-height: 5rem;
+        }
+
+        .choice {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .choice:hover {
+            opacity: 0.5;
+            background-color: white;
+
+        }
+
+        img {
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            gap: 3rem;
+        }
+
+
+        .score-board {
+            background-color: grey;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin-top: 3rem;
+            gap: 5rem;
+        }
+
+        #user-score,
+        #comp-score {
+            font-size: 3rem;
+        }
+
+        .msg-container {
+            margin-top: 3rem;
+
+        }
+
+        #msg {
+            background-color: black;
+            color: white;
+            font-size: 2rem;
+            display: inline-block;
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rock Paper Scissors</h1>
+    
+    <div class="choices">
+        <div class="choice" id="Rock">
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210705223706/rock.jpeg" alt="Not Available"
+                id="rock">
+        </div>
+        <div class="choice" id="Paper">
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210705223645/paper.jpeg" alt="Not Available"
+                id="paper">
+        </div>
+        <div class="choice" id="Scissors">
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210705223721/scissor.jpeg"
+                alt="Not Available" id="scissor">
+            <p></p>
+        </div>
+    </div>
+    <div class="score-board">
+        <div class="score">
+            <p id="user-score" name="userwin">0</p>
+            <p>You</p>
+
+        </div>
+        <div class="score">
+            <p id="comp-score" name="userlose">0</p>
+            <p>Computer</p>
+        </div>
+    </div>
+    <div class="msg-container">
+        <p id="msg">Play Your Move</p>
+    </div>
+
+
+    <script>
+
+        //game logic
+        let userScore = 0;
+        let compScore = 0;
+
+        
+
+        const choices = document.querySelectorAll(".choice")
+        const msg = document.querySelector("#msg")
+
+        const userScorePara = document.querySelector("#user-score")
+        const compScorePara = document.querySelector("#comp-score")
+
+
+        const resetbutton=document.querySelector("#resetbut")
+
+        const reset=(resetbutton)=>{
+            resetbutton.preventDefault();
+        }
+
+        const getCompChoice = () => {
+            const options = ["Rock", "Paper", "Scissors"]
+            const randIdx = Math.floor(Math.random() * 3)
+            return options[randIdx];
+        }
+
+        const drawGame = () => {
+            console.log("the game is draw")
+            msg.innerText = "Game was draw.Play Again";
+            msg.style.backgroundColor = "Grey";
+        }
+
+        const showWinner = (userWin, userChoice, compChoice) => {
+            if (userWin) {
+                console.log("You Win")
+                userScore++
+                userScorePara.style.color="green"
+                userScorePara.innerText = userScore
+                msg.innerText = `You Win! Your ${userChoice} beats ${compChoice}`;
+                msg.style.backgroundColor = "green"
+            } else {
+                console.log("You Lose")
+                compScore++;
+                compScorePara.style.color="red"
+                compScorePara.innerText = compScore;
+                msg.innerText = `You Lose! ${compChoice} beats Your ${userChoice}`;
+                msg.style.backgroundColor = "red";
+
+            }
+
+        };
+
+        const playGame = (userChoice) => {
+            console.log("user choice=", userChoice)
+            //Generate Computer Choice
+            const compChoice = getCompChoice();
+            console.log("comp choice =", compChoice)
+
+            if (userChoice === compChoice) {
+                //DrawGame
+                drawGame()
+            } else {
+                let userWin = true;
+                if (userChoice === "Rock") {
+                    //scissors,paper
+                    userWin = compChoice === "Paper" ? false : true;
+                } else if (userChoice === "Paper") {
+                    //rock,scissors
+                    userWin = compChoice === "Scissors" ? false : true;
+                } else {
+                    //rock,paper
+                    userWin = compChoice === "Rock" ? false : true
+                }
+                showWinner(userWin, userChoice, compChoice)
+            }
+        };
+
+
+
+        choices.forEach((choice) => {
+            choice.addEventListener("click", () => {
+                const userChoice = choice.getAttribute("id");
+                playGame(userChoice);
+            });
+        });
+
+        
+
+    </script>
+
+</body>
+
+</html>
