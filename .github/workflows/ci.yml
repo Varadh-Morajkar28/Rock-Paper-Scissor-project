@@ -1,5 +1,21 @@
-# 1. Update checkout
-- uses: actions/checkout@v7
+name: Build and Check
 
-# 2. Update upload-artifact
-- uses: actions/upload-artifact@v7
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: build-assets
+          path: . # This uploads your current folder; change this path if you only want a specific folder (like dist or build)
