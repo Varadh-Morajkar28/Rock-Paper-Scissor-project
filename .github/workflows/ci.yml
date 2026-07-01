@@ -1,0 +1,5 @@
+# Find this:
+- uses: actions/checkout@v4
+
+# Change it to:
+- uses: actions/checkout@v6
