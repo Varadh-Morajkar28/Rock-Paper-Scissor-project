@@ -1,5 +1,5 @@
-# Find this:
-- uses: actions/checkout@v4
+# 1. Update checkout
+- uses: actions/checkout@v7
 
-# Change it to:
-- uses: actions/checkout@v6
+# 2. Update upload-artifact
+- uses: actions/upload-artifact@v7
